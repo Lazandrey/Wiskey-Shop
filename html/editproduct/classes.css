@@ -166,37 +166,6 @@ nav ul {
   border: 1px solid currentColor;
   border-radius: 5px;
 }
-
-.products-wrapper {
-  width: 100%;
-  padding: 1rem 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  gap: 1rem;
-}
-
-.product-card {
-  min-width: 350px;
-  display: flex;
-  flex-direction: column;
-  width: 20rem;
-  padding: 2rem 1rem 1rem 1rem;
-  background-color: var(--accent-color);
-}
-.product-card img {
-  height: 20rem;
-  width: 100%;
-  object-fit: contain;
-}
-.product-card-price {
-  text-align: left;
-  font-weight: 600;
-}
-.product-card-descrtiption {
-  text-align: center;
-  height: 2lh;
-}
 .product-link {
   color: var(--accent-color);
   text-decoration: none;
@@ -223,8 +192,10 @@ nav ul {
 .product-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding: 1rem;
+  max-width: 50rem;
+  margin: auto;
 }
 
 .full-product-links-wrapper {
@@ -232,6 +203,8 @@ nav ul {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem;
+  max-width: 50rem;
+  margin: auto;
 }
 .full-product-card-link {
   margin: auto;
@@ -245,4 +218,76 @@ nav ul {
 }
 .delete-link {
   background-color: brown;
+}
+.main-wrapper {
+  display: flex;
+  width: 98%;
+
+  justify-content: center;
+}
+.side-menu {
+  display: none;
+}
+.search-input-wrapper-desktop {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+  .burger-menu {
+    display: none;
+  }
+  .logo-text {
+    font-size: 2.5rem;
+  }
+  .basket-icon {
+    height: 2.5rem;
+    width: 4rem;
+    font-size: 1.5rem;
+  }
+  #search-input {
+    font-size: 1.5rem;
+  }
+  #search-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: 80%;
+  }
+  .side-menu {
+    width: 10rem;
+    display: block;
+    color: var(--accent-color);
+    padding: 0.5rem 0;
+  }
+  .side-menu ul li a {
+    text-decoration: none;
+    color: var(--accent-color);
+  }
+  .side-menu li {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+  }
+  .products-wrapper {
+    width: fit-content;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 0.5rem;
+    margin: auto;
+    gap: 2rem;
+  }
+
+  .main-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .search-input-wrapper-desktop {
+    display: flex;
+    background-color: white;
+    width: 60%;
+    align-items: center;
+    margin: 0.5rem;
+    justify-content: center;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+  }
 }
