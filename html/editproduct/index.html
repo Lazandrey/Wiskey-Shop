@@ -10,10 +10,47 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="./classes.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/classes.css" />
+    <script type="module" defer src="./index.js"></script>
+    <title>Wiskey shop</title>
   </head>
   <body>
+    <dialog class="error-dialog" aria-label="Error message" id="error-dialog">
+      <h3>Error</h3>
+      <p id="error-message-text"></p>
+      <button type="submit" onclick="window['error-dialog'].close()">Ok</button>
+    </dialog>
+    <dialog
+      class="confirm-ok-dialog"
+      aria-label="Confirmation message"
+      id="confirm-ok-dialog"
+    >
+      <h3>Message</h3>
+      <p id="confirm-ok-message-text"></p>
+      <button type="submit" onclick="window['confirm-ok-dialog'].close()">
+        Ok
+      </button>
+    </dialog>
+    <dialog
+      class="confirm-dialog"
+      aria-label="Confirmation question"
+      id="confirm-dialog"
+    >
+      <form method="dialog">
+        <h3>Please confirm</h3>
+        <p id="confirm-message-text"></p>
+
+        <button type="submit" value="confirm">Ok</button>
+
+        <button
+          type="reset"
+          value="cancel"
+          onclick="window['confirm-dialog'].close()"
+        >
+          Cancel
+        </button>
+      </form>
+    </dialog>
     <header>
       <div class="header-menu">
         <div class="burger-menu">
@@ -23,7 +60,7 @@
           />
           <div class="dropdown">
             <ul>
-              <li><a href="">All catalog</a></li>
+              <li><a href="../../index.html">All catalog</a></li>
               <li>
                 Category:
                 <ul>
@@ -41,22 +78,40 @@
                   <li><a href="">Macallan</a></li>
                 </ul>
               </li>
-              <li><a href=""></a>Add product</li>
+              <li><a href="../editproduct/index.html?id=-1"></a>Add product</li>
             </ul>
           </div>
         </div>
         <p class="logo-text">WISKEY SHOP</p>
         <div class="search-input-wrapper-desktop">
-          <input id="search-input" type="text" placeholder="Search" />
-          <button id="search-button" type="submit">Search</button>
+          <input
+            id="search-input-desktop"
+            class="search-input"
+            type="text"
+            placeholder="Search"
+          />
+          <button
+            id="search-button-desktop"
+            class="search-button"
+            type="submit"
+          >
+            Search
+          </button>
         </div>
         <div class="basket-icon">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </div>
       </div>
       <div class="search-input-wrapper">
-        <input id="search-input" type="text" placeholder="Search" />
-        <button id="search-button" type="submit">Search</button>
+        <input
+          id="search-input"
+          class="search-input"
+          type="text"
+          placeholder="Search"
+        />
+        <button id="search-button" class="search-button" type="submit">
+          Search
+        </button>
       </div>
     </header>
 
@@ -64,7 +119,7 @@
       <div class="main-wrapper">
         <div class="side-menu">
           <ul>
-            <li><a href="">All catalog</a></li>
+            <li><a href="../../index.html">All catalog</a></li>
             <li>
               Category:
               <ul>
@@ -82,68 +137,60 @@
                 <li><a href="">Macallan</a></li>
               </ul>
             </li>
-            <li><a href=""></a>Add product</li>
+            <li>
+              <a href="../../html/editproduct/index.html?id=-1">Add product</a>
+            </li>
           </ul>
         </div>
-        <div class="product-wrapper">
-          <p class="product-link">
-            <a href="../../index.html">Home</a> >
-            <a href="">Single Malt Scotch</a> >
-            <a href=""> Glenlivet 19 Year Old, 1999 by Samaroli</a>
-          </p>
+        <div class="full-product-wrapper">
+          <p id="product-link" class="product-link"></p>
           <div class="full-product-card">
             <h2>Title:</h2>
-            <input
-              type="text"
-              placeholder="Glenlivet 19 Year Old, 1999 by Samaroli"
-            />
+            <input id="product-title" type="text" />
             <h2>Image url:</h2>
-            <input type="url" placeholder="../../images/Picture__69894.jpg" />
+            <input id="product-image" type="url" />
             <h2>Brand:</h2>
-            <input type="text" placeholder="Glenlivet" />
+            <input id="product-brand" type="text" />
             <h2>Category:</h2>
-            <input type="text" placeholder="Single Malt Scotch" />
+            <input id="product-category" type="text" />
+            <h2>Price:</h2>
+            <input id="product-price" type="text" />
             <h2>Desctiption:</h2>
-            <textarea name="desctiption" id="desctiption" rows="10" cols="50">
-Bottled exclusively for us at The Whisky Shop, this Glengoyne
-  expression has been aged in a single first-fill American oak bourbon
-  barrel for almost 20 years. With an outrun of just 111 bottles, this
-  exquisite Highland dram is presented at a cask strength of 54.6%
-  abv. Free from chill filtration.  Notes of cranberries, highland
-  toffee and fresh cinnamon fill the nose, before a palate full of
-  tropical fruit sweetness, rich oak, tangy marmalade and intense dark
-  chocolate. On the finish, notes of Madagascan vanilla, soft spices
-  and hints of butterscotch are revealed. We recommend serving with a
-  drop of water to unlock some more hidden tropical sweetness.</textarea
-            >
-
-            <h2>Glenlivet 19 Year Old, 1999 by Samaroli</h2>
-            <img src="../../images/Picture__69894.jpg" alt="wiskey bottle" />
-            <h3>Brand: Glenlivet</h3>
-            <h3>Category: Single Malt Scotch</h3>
-            <p>
-              Bottled exclusively for us at The Whisky Shop, this Glengoyne
-              expression has been aged in a single first-fill American oak
-              bourbon barrel for almost 20 years. With an outrun of just 111
-              bottles, this exquisite Highland dram is presented at a cask
-              strength of 54.6% abv. Free from chill filtration.  Notes of
-              cranberries, highland toffee and fresh cinnamon fill the nose,
-              before a palate full of tropical fruit sweetness, rich oak, tangy
-              marmalade and intense dark chocolate. On the finish, notes of
-              Madagascan vanilla, soft spices and hints of butterscotch are
-              revealed. We recommend serving with a drop of water to unlock some
-              more hidden tropical sweetness.
-            </p>
+            <textarea
+              name="desctiption"
+              id="product-description"
+              rows="10"
+              cols="50"
+            ></textarea>
+            <button id="preview-product-btn" class="full-product-card-link">
+              See preview below
+            </button>
+            <h2 id="product-title-preview"></h2>
+            <img id="product-image-preview" alt="wiskey bottle" />
+            <h3 id="product-brand-preview"></h3>
+            <h3 id="product-category-preview"></h3>
+            <h3 id="product-price-preview"></h3>
+            <p id="product-description-preview"></p>
             <div class="full-product-links-wrapper">
-              <a class="full-product-card-link" href="">Confirm changes</a>
-              <a class="full-product-card-link" href="">Add new product</a>
+              <button id="confirm-product-btn" class="full-product-card-link">
+                Confirm changes
+              </button>
+              <a
+                class="full-product-card-link"
+                href="../editproduct/index.html?id=-1"
+                >Add new product</a
+              >
               <a class="full-product-card-link" href="../../index.html"
                 >Return to catalog</a
               >
 
-              <a class="full-product-card-link delete-link" href=""
-                >Delete product</a
+              <button
+                class="full-product-card-link delete-link"
+                id="delete-product-btn"
+                `
               >
+                Delete product
+              </button>
             </div>
           </div>
         </div>

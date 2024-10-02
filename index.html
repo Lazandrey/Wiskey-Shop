@@ -10,8 +10,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="./classes.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles/classes.css" />
+    <script type="module" defer src="./index.js"></script>
+    <title>Wiskey shop</title>
   </head>
   <body>
     <header>
@@ -23,7 +24,7 @@
           />
           <div class="dropdown">
             <ul>
-              <li><a href="">All catalog</a></li>
+              <li><a href="../../index.html">All catalog</a></li>
               <li>
                 Category:
                 <ul>
@@ -41,22 +42,41 @@
                   <li><a href="">Macallan</a></li>
                 </ul>
               </li>
-              <li><a href=""></a>Add product</li>
+              <li><a href="../editproduct/index.html?id=-1"></a>Add product</li>
             </ul>
           </div>
         </div>
         <p class="logo-text">WISKEY SHOP</p>
+
         <div class="search-input-wrapper-desktop">
-          <input id="search-input" type="text" placeholder="Search" />
-          <button id="search-button" type="submit">Search</button>
+          <input
+            id="search-input-desktop"
+            class="search-input"
+            type="text"
+            placeholder="Search"
+          />
+          <button
+            id="search-button-desktop"
+            class="search-button"
+            type="submit"
+          >
+            Search
+          </button>
         </div>
         <div class="basket-icon">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </div>
       </div>
       <div class="search-input-wrapper">
-        <input id="search-input" type="text" placeholder="Search" />
-        <button id="search-button" type="submit">Search</button>
+        <input
+          id="search-input"
+          class="search-input"
+          type="text"
+          placeholder="Search"
+        />
+        <button id="search-button" class="search-button" type="submit">
+          Search
+        </button>
       </div>
     </header>
 
@@ -69,7 +89,7 @@
       <div class="main-wrapper">
         <div class="side-menu">
           <ul>
-            <li><a href="">All catalog</a></li>
+            <li><a href="../../index.html">All catalog</a></li>
             <li>
               Category:
               <ul>
@@ -87,51 +107,50 @@
                 <li><a href="">Macallan</a></li>
               </ul>
             </li>
-            <li><a href=""></a>Add product</li>
+            <li>
+              <a href="../../html/editproduct/index.html?id=-1">Add product</a>
+            </li>
           </ul>
         </div>
-        <div class="products-wrapper">
-          <div class="product-card">
-            <img src="./images/Picture__69894.jpg" alt="" />
-            <p class="product-card-descrtiption">
-              Glenlivet 19 Year Old, 1999 by Samaroli
-            </p>
-            <p class="product-card-price">Eur 799.99</p>
-          </div>
-          <div class="product-card">
-            <img src="./images/ardnahoe_inaugural_release_ps.jpg" alt="" />
-            <p class="product-card-descrtiption">Ardnahoe Inaugural Release</p>
-            <p class="product-card-price">Eur 70.00</p>
-          </div>
-          <div class="product-card">
-            <img src="./images/macallan_12yo_sherryoak_ps.jpg" alt="" />
-            <p class="product-card-descrtiption">
-              Macallan 12 Year Old Sherry Oak
-            </p>
-            <p class="product-card-price">Eur 79.95</p>
-          </div>
-          <div class="product-card">
-            <img
-              src="./images/cc_clynelish_2008_16yo_tws_exclusive_311778_ps.webp"
-              alt=""
-            />
-            <p class="product-card-descrtiption">
-              Connoisseurs Choice Clynelish 2008 16 Year Old #311778 TWS
-              Exclusive
-            </p>
-            <p class="product-card-price">Eur 220.00</p>
-          </div>
-        </div>
+        <div id="products-wrapper" class="products-wrapper"></div>
       </div>
     </main>
     <footer>
       <p class="logo-text-footer">WS</p>
+      <p class="logo-text-footer-big">WISKEY SHOP</p>
       <nav>
         <ul>
-          <li><a href=""></a>About Us</li>
-          <li><a href=""></a>Contact Us</li>
-          <li><a href=""></a>Delivery</li>
-          <li><a href=""></a>Legal</li>
+          <li>
+            <a href=""></a>About Us
+            <ul>
+              <li><a href=""></a>Mission</li>
+              <li><a href=""></a>History</li>
+            </ul>
+          </li>
+          <li>
+            <a href=""></a>Contact Us
+            <ul>
+              <li><a href=""></a>Phone</li>
+              <li><a href=""></a>Email</li>
+              <li><a href=""></a>Address</li>
+            </ul>
+          </li>
+          <li>
+            <a href=""></a>Delivery
+            <ul>
+              <li><a href=""></a>EU Delivery</li>
+              <li><a href=""></a>UK Delivery</li>
+              <li><a href=""></a>International Delivery</li>
+            </ul>
+          </li>
+          <li>
+            <a href=""></a>Legal
+            <ul>
+              <li><a href=""></a>Terms of Use</li>
+              <li><a href=""></a>Privacy Policy</li>
+              <li><a href=""></a>Cookie Policy</li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </footer>
