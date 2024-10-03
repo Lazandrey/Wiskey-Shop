@@ -15,67 +15,81 @@
     <title>Wiskey shop</title>
   </head>
   <body>
+    <dialog class="error-dialog" aria-label="Error message" id="error-dialog">
+      <h3>Error</h3>
+      <p id="error-message-text"></p>
+      <button type="submit" onclick="window['error-dialog'].close()">Ok</button>
+    </dialog>
+    <dialog
+      class="confirm-ok-dialog"
+      aria-label="Confirmation message"
+      id="confirm-ok-dialog"
+    >
+      <h3>Message</h3>
+      <p id="confirm-ok-message-text"></p>
+      <button type="submit" onclick="window['confirm-ok-dialog'].close()">
+        Ok
+      </button>
+    </dialog>
+    <dialog
+      class="confirm-dialog"
+      aria-label="Confirmation question"
+      id="confirm-dialog"
+    >
+      <form method="dialog">
+        <h3>Please confirm</h3>
+        <p id="confirm-message-text"></p>
+
+        <button type="submit" value="confirm">Ok</button>
+
+        <button
+          type="reset"
+          value="cancel"
+          onclick="window['confirm-dialog'].close()"
+        >
+          Cancel
+        </button>
+      </form>
+    </dialog>
     <header>
-      <div class="header-menu">
-        <div class="burger-menu">
-          <img
-            src="../../images/menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
-            alt="menu"
-          />
-          <div class="dropdown">
-            <ul>
-              <li><a href="../../index.html">All catalog</a></li>
-              <li>
-                Category:
-                <ul>
-                  <li><a href="">Single Malt Scotch</a></li>
-                  <li><a href="">Single Grain Scotch</a></li>
-                  <li><a href="">Blended Scotch</a></li>
-                </ul>
-              </li>
-              <li>
-                Brang:
-                <ul>
-                  <li><a href="">Ardberg</a></li>
-                  <li><a href="">Bruichladdich</a></li>
-                  <li><a href="">Glenallachie</a></li>
-                  <li><a href="">Macallan</a></li>
-                </ul>
-              </li>
-              <li><a href="../editproduct/index.html?id=-1"></a>Add product</li>
-            </ul>
-          </div>
-        </div>
-        <p class="logo-text">WISKEY SHOP</p>
-        <div class="search-input-wrapper-desktop">
-          <input
-            id="search-input-desktop"
-            class="search-input"
-            type="text"
-            placeholder="Search"
-          />
-          <button
-            id="search-button-desktop"
-            class="search-button"
-            type="submit"
-          >
-            Search
-          </button>
-        </div>
-        <div class="basket-icon">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <div class="burger-menu">
+        <img
+          src="./images/menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
+          alt="menu"
+        />
+        <div class="dropdown">
+          <ul>
+            <li><a href="../../index.html">All catalog</a></li>
+            <li>
+              Category:
+              <ul id="category-dropdown"></ul>
+            </li>
+            <li>
+              Brang:
+              <ul id="brand-dropdown"></ul>
+            </li>
+            <li>
+              <a href="../../html/editproduct/index.html?id=-1">Add product</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="search-input-wrapper">
+      <p class="logo-text">WISKEY SHOP</p>
+
+      <div class="basket-icon">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      </div>
+
+      <div class="search-input-wrapper" id="search-input-wrapper" >
         <input
           id="search-input"
           class="search-input"
           type="text"
           placeholder="Search"
         />
-        <button id="search-button" class="search-button" type="submit">
-          Search
-        </button>
+        <input id="search-button" class="search-button" type="submit" >
+          
+        </input>
       </div>
     </header>
 
@@ -86,20 +100,11 @@
             <li><a href="../../index.html">All catalog</a></li>
             <li>
               Category:
-              <ul>
-                <li><a href="">Single Malt Scotch</a></li>
-                <li><a href="">Single Grain Scotch</a></li>
-                <li><a href="">Blended Scotch</a></li>
-              </ul>
+              <ul id="category-side"></ul>
             </li>
             <li>
               Brang:
-              <ul>
-                <li><a href="">Ardberg</a></li>
-                <li><a href="">Bruichladdich</a></li>
-                <li><a href="">Glenallachie</a></li>
-                <li><a href="">Macallan</a></li>
-              </ul>
+              <ul id="brand-side"></ul>
             </li>
             <li>
               <a href="../../html/editproduct/index.html?id=-1">Add product</a>
@@ -122,12 +127,13 @@
               <a id="edit-product-link" class="full-product-card-link" href=""
                 >Edit product</a
               >
-              <a
-                id="delete-product-link"
+              <button
                 class="full-product-card-link delete-link"
-                href=""
-                >Delete product</a
+                id="delete-product-btn"
+                `
               >
+                Delete product
+              </button>
             </div>
           </div>
         </div>

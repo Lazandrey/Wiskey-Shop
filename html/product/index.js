@@ -1,5 +1,5 @@
-import { getProductById } from "../../utils/fetches.js";
 import { buildProduct } from "../../utils/builders.js";
+import { deleteProduct } from "../../utils/events.js";
 const params = new URLSearchParams(document.location.search);
 const productId = params.get("id");
 
@@ -12,9 +12,13 @@ const productPrice = document.getElementById("product-price");
 const productDescription = document.getElementById("product-description");
 const editProductLink = document.getElementById("edit-product-link");
 const deleteProductLink = document.getElementById("delete-product-link");
+const deleteBtn = document.getElementById("delete-product-btn");
+
+deleteBtn.addEventListener("click", async () => {
+  deleteProduct(productId);
+});
 
 const initApp = async () => {
-  //   const product = await getProductById(productId);
   buildProduct(
     productId,
     productLink,

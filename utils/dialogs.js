@@ -20,12 +20,4 @@ export const ConfirmDialogOpen = (msg) => {
   warning.innerText = msg;
   dialog.showModal();
   return dialog;
-  //   console.log(dialog.returnValue);
-  //   if (dialog.returnValue === "confirm") {
-  //     return true;
-  //   }
-  //   if (dialog.returnValue === "cancel") {
-  //     return false;
-  //   }
-  //   return dialog.returnValue;
 };

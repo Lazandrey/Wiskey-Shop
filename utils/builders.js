@@ -1,4 +1,95 @@
-import { getProductById } from "../../utils/fetches.js";
+import { getProductById, getAllProducts } from "../../utils/fetches.js";
+
+const addSearchLisener = () => {
+  const searchInput = document.getElementById("search-input");
+  const searchBtn = document.getElementById("search-button");
+
+  searchInput.addEventListener("keypress", function (event) {
+    // If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      searchBtn.click();
+    }
+    searchBtn.addEventListener("click", () => {
+      const search = searchInput.value;
+      window.location.href = `../../index.html?search=${search}`;
+    });
+  });
+};
+
+const productSearch = (product, search) => {
+  if (product.name.toLowerCase().includes(search.toLowerCase())) {
+    return true;
+  }
+  if (product.brand.toLowerCase().includes(search.toLowerCase())) {
+    console.log(product.brand, search);
+    return true;
+  }
+  if (product.category.toLowerCase().includes(search.toLowerCase())) {
+    return true;
+  }
+  if (product.description.toLowerCase().includes(search.toLowerCase())) {
+    return true;
+  }
+  if (product.price.toString().includes(search)) {
+    return true;
+  }
+  return false;
+};
+
+const buildMenuHtml = (categories, brands) => {
+  const categorySidemenu = document.getElementById("category-side");
+  const brandSidemenu = document.getElementById("brand-side");
+  const categoryDropdown = document.getElementById("category-dropdown");
+  const brandDropdown = document.getElementById("brand-dropdown");
+
+  categoryDropdown.innerHTML = "";
+  brandDropdown.innerHTML = "";
+
+  categorySidemenu.innerHTML = "";
+  brandSidemenu.innerHTML = "";
+  categories.forEach((category) => {
+    const categoryLink = document.createElement("li");
+    categoryLink.innerHTML = `<a href="../../index.html?category=${category}">${category}</a>`;
+    categorySidemenu.appendChild(categoryLink);
+
+    const categoryDropdownLink = document.createElement("li");
+    categoryDropdownLink.innerHTML = `<a href="../../index.html?category=${category}">${category}</a>`;
+    categoryDropdown.appendChild(categoryDropdownLink);
+  });
+  brands.forEach((brand) => {
+    const brandLink = document.createElement("li");
+    brandLink.innerHTML = `<a href="../../index.html?brand=${brand}">${brand}</a>`;
+    brandSidemenu.appendChild(brandLink);
+
+    const brandDropdownLink = document.createElement("li");
+    brandDropdownLink.innerHTML = `<a href="../../index.html?brand=${brand}">${brand}</a>`;
+    brandDropdown.appendChild(brandDropdownLink);
+  });
+};
+
+export const buildMenu = async (products) => {
+  if (products === undefined) {
+    products = await getAllProducts();
+  }
+  const categories = products
+    .map((p) => p.category)
+    .filter(
+      (category, index, self) => index === self.findIndex((c) => c === category)
+    )
+    .sort((a, b) => a.localeCompare(b));
+
+  const brands = products
+    .map((p) => p.brand)
+    .filter(
+      (brand, index, self) => index === self.findIndex((c) => c === brand)
+    )
+    .sort((a, b) => a.localeCompare(b));
+
+  buildMenuHtml(categories, brands);
+};
 
 const getProductCard = (product) => {
   const productCard = document.createElement("a");
@@ -23,7 +114,27 @@ const getProductCard = (product) => {
   return productCard;
 };
 
-export const buildProductsList = (products, productsWrapper) => {
+export const buildProductsList = async (
+  productsWrapper,
+  categorySearch,
+  brandSearch,
+  search
+) => {
+  addSearchLisener();
+  let products = await getAllProducts();
+  buildMenu(products);
+  products.sort((a, b) => a.price - b.price);
+  if (categorySearch) {
+    products = products.filter((p) => p.category === categorySearch);
+  }
+  if (brandSearch) {
+    products = products.filter((p) => p.brand === brandSearch);
+  }
+  if (search) {
+    products = products.filter((product) => {
+      return productSearch(product, search);
+    });
+  }
   productsWrapper.innerHTML = "";
   products.forEach((product) => {
     productsWrapper.append(getProductCard(product));
@@ -42,9 +153,10 @@ export const buildProduct = async (
   productBrand,
   productPrice,
   productDescription,
-  editProductLink,
-  deleteProductLink
+  editProductLink
 ) => {
+  addSearchLisener();
+  buildMenu();
   const product = await getProductById(productId);
   productLink.innerHTML = getProdactLink(product);
   productImage.src = product.image_url;
@@ -58,7 +170,6 @@ export const buildProduct = async (
     }).format(product.price);
   productDescription.innerText = product.description;
   editProductLink.href = `../editproduct/index.html?id=${product.id}`;
-  deleteProductLink.href = `./deleteproduct/index.html?id=${product.id}`;
 };
 export const buildProductEdit = async (
   productId,
@@ -76,6 +187,8 @@ export const buildProductEdit = async (
   productPricePreview,
   productDescriptionPreview
 ) => {
+  addSearchLisener();
+  buildMenu();
   if (productId == "-1") {
     productImage.placeholder = "Add image url";
     productName.placeholder = "Add product name";
@@ -107,109 +220,3 @@ export const buildProductEdit = async (
     productDescriptionPreview.innerText = productDescription.value;
   }
 };
-
-// const getRecipeDifficultyCSSClass = (recipe) => {
-//   switch (recipe.difficulty) {
-//     case "Easy":
-//       return "easy";
-//       break;
-//     case "Moderate":
-//       return "moderate";
-//       break;
-//     case "Hard":
-//       return "hard";
-//       break;
-//   }
-// };
-// const getRecipeHTML = (recipe) => {
-//   const recipeCard = document.createElement("a");
-//   const recipeTitle = document.createElement("h2");
-//   const recipeDescription = document.createElement("p");
-//   const recipeDirections = document.createElement("p");
-//   const recipeIngredients = document.createElement("p");
-//   const recipeDifficulty = document.createElement("p");
-//   const recipeImage = document.createElement("img");
-//   const ingredientsNo = document.createElement("h3");
-
-//   recipeTitle.innerText = recipe.title;
-//   recipeDescription.innerText = recipe.description;
-//   recipeDirections.innerText = recipe.instructions;
-//   recipeIngredients.innerText = recipe.ingredients;
-//   recipeDifficulty.innerText = recipe.difficulty;
-//   recipeImage.src = recipe.recipe_img;
-//   recipeDifficulty.classList.add(getRecipeDifficultyCSSClass(recipe));
-//   ingredientsNo.innerText =
-//     "Ingredients number: " + recipe.ingredients.split(";").length;
-//   recipeCard.classList.add("recipe");
-
-//   recipeCard.href = `./recipe/index.html?id=${recipe.id}`;
-//   recipeCard.append(recipeTitle);
-//   const div1 = document.createElement("div");
-//   const div2 = document.createElement("div");
-//   const h31 = document.createElement("h3");
-//   h31.innerText = "Description:";
-//   div2.append(h31, recipeDescription);
-//   const h311 = document.createElement("h3");
-//   h311.innerText = "Difficulty level:";
-
-//   div2.append(h311, recipeDifficulty, ingredientsNo);
-//   div1.append(div2, recipeImage);
-//   recipeCard.append(div1);
-//   const h32 = document.createElement("h3");
-//   h32.innerText = "Directions:";
-//   recipeCard.append(h32);
-
-//   recipeCard.append(recipeDirections);
-//   const h33 = document.createElement("h3");
-//   h33.innerText = "Ingredients:";
-//   recipeCard.append(h33);
-
-//   recipeCard.append(recipeIngredients);
-
-//   return recipeCard;
-// };
-
-// export const buildRecipesList = (recipes, recipesWrapper) => {
-//   recipesWrapper.innerHTML = "";
-//   recipes.forEach((recipe) => {
-//     recipesWrapper.append(getRecipeHTML(recipe));
-//   });
-// };
-
-// export const buildRecipe = (
-//   recipe,
-//   title,
-//   description,
-//   directions,
-//   ingredients,
-//   difficulty,
-//   image,
-//   ingredientsNo
-// ) => {
-//   title.innerText = recipe.title;
-//   description.innerText = recipe.description;
-//   directions.innerText = recipe.instructions;
-//   ingredients.innerText = recipe.ingredients;
-//   difficulty.innerText = recipe.difficulty;
-//   ingredientsNo.innerText =
-//     "Ingredients number: " + recipe.ingredients.split(";").length;
-//   image.src = recipe.recipe_img;
-//   difficulty.classList.add(getRecipeDifficultyCSSClass(recipe));
-// };
-
-// export const buildRecipeEdit = (
-//   recipe,
-//   title,
-//   description,
-//   directions,
-//   ingredients,
-//   difficulty,
-//   image
-// ) => {
-//   title.value = recipe.title;
-//   description.value = recipe.description;
-//   directions.value = recipe.instructions;
-//   ingredients.value = recipe.ingredients;
-//   difficulty.value = recipe.difficulty;
-//   image.value = recipe.recipe_img;
-// };
