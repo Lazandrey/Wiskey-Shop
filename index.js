@@ -1,4 +1,5 @@
 import { buildProductsList } from "./utils/builders.js";
+import { getAllProducts } from "../../utils/fetches.js";
 
 const params = new URLSearchParams(document.location.search);
 const categorySearch = params.get("category");
@@ -8,7 +9,14 @@ const search = params.get("search");
 const productsWrapper = document.getElementById("products-wrapper");
 
 const initApp = async () => {
-  buildProductsList(productsWrapper, categorySearch, brandSearch, search);
+  const products = await getAllProducts();
+  buildProductsList(
+    products,
+    productsWrapper,
+    categorySearch,
+    brandSearch,
+    search
+  );
 };
 
 initApp();

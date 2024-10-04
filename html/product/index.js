@@ -1,5 +1,6 @@
 import { buildProduct } from "../../utils/builders.js";
 import { deleteProduct } from "../../utils/events.js";
+import { getProductById, getAllProducts } from "../../utils/fetches.js";
 const params = new URLSearchParams(document.location.search);
 const productId = params.get("id");
 
@@ -19,7 +20,9 @@ deleteBtn.addEventListener("click", async () => {
 });
 
 const initApp = async () => {
+  const product = await getProductById(productId);
   buildProduct(
+    product,
     productId,
     productLink,
     productName,

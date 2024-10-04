@@ -115,13 +115,14 @@ const getProductCard = (product) => {
 };
 
 export const buildProductsList = async (
+  products,
   productsWrapper,
   categorySearch,
   brandSearch,
   search
 ) => {
   addSearchLisener();
-  let products = await getAllProducts();
+
   buildMenu(products);
   products.sort((a, b) => a.price - b.price);
   if (categorySearch) {
@@ -146,6 +147,7 @@ export const getProdactLink = (product) => {
   return link;
 };
 export const buildProduct = async (
+  product,
   productId,
   productLink,
   productName,
@@ -157,7 +159,7 @@ export const buildProduct = async (
 ) => {
   addSearchLisener();
   buildMenu();
-  const product = await getProductById(productId);
+
   productLink.innerHTML = getProdactLink(product);
   productImage.src = product.image_url;
   productName.innerText = "Brand: " + product.name;
@@ -172,6 +174,7 @@ export const buildProduct = async (
   editProductLink.href = `../editproduct/index.html?id=${product.id}`;
 };
 export const buildProductEdit = async (
+  product,
   productId,
   productLink,
   productName,
@@ -197,7 +200,6 @@ export const buildProductEdit = async (
     productPrice.placeholder = "Add product price";
     productDescription.placeholder = "Add product description";
   } else {
-    const product = await getProductById(productId);
     productLink.innerHTML = getProdactLink(product);
     productImage.value = product.image_url;
     productName.value = product.name;
